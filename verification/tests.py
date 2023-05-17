@@ -33,6 +33,12 @@ if not hasattr(some_car1, "model"):
 if not isinstance(some_car1.model, str):
     raise TypeError("'model' attribute should be of type 'str'")
 
+if not hasattr(some_car1, "working_engine"):
+    raise NotImplementedError("Where is 'working_engine' attribute of 'some_car1' object?")
+
+if not isinstance(some_car1.working_engine, bool):
+    raise TypeError("'model' attribute should be of type 'bool'")
+
 if not "some_car2" in USER_GLOBAL:
     raise NotImplementedError("Where is 'some_car2'?")
 
@@ -53,12 +59,29 @@ if not hasattr(some_car2, "model"):
 if not isinstance(some_car2.model, str):
     raise TypeError("'model' attribute should be of type 'str'")
 
+if not hasattr(some_car2, "working_engine"):
+    raise NotImplementedError("Where is 'working_engine' attribute of 'some_car2' object?")
+
+if not isinstance(some_car2.working_engine, bool):
+    raise TypeError("'model' attribute should be of type 'bool'")
+
 if not 'start_engine' in vars(Car):
     raise NotImplementedError("Where is 'start_engine' method?")
 
 params2 = signature(Car.start_engine).parameters
 if not all((len(params2) ==  1, 'self' in params2)):
     raise NotImplementedError("Check 'start_engine' arguments")
+
+if not 'stop_engine' in vars(Car):
+    raise NotImplementedError("Where is 'stop_engine' method?")
+
+params3 = signature(Car.stop_engine).parameters
+if not all((len(params3) ==  1, 'self' in params3)):
+    raise NotImplementedError("Check 'stop_engine' arguments")
+
+if not all((some_car1.working_engine, some_car2.working_engine)):
+    raise Warning("Not all cars have been started.")
+
 """
 
 run_test = """
