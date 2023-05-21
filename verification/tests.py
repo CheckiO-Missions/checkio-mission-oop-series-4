@@ -90,8 +90,11 @@ params3 = signature(Car.stop_engine).parameters
 if not all((len(params3) ==  1, 'self' in params3)):
     raise NotImplementedError("Check 'stop_engine' arguments")
 
-if not all((some_car1.working_engine, some_car2.working_engine)):
-    raise Warning("Not all cars have been started.")
+if not some_car1.working_engine:
+    raise Warning("'some_car1' has not been started.")
+
+if not some_car2.working_engine:
+    raise Warning("'some_car2' has not been started.")
 
 """
 
