@@ -91,10 +91,10 @@ if not all((len(params3) ==  1, 'self' in params3)):
     raise NotImplementedError("Check 'stop_engine' arguments")
 
 if not some_car1.working_engine:
-    raise Warning("'some_car1' has not been started.")
+    raise Warning("'some_car1' has not been started: method is not implemented or method call absent")
 
 if not some_car2.working_engine:
-    raise Warning("'some_car2' has not been started.")
+    raise Warning("'some_car2' has not been started: method is not implemented or method call absent")
 
 """
 
