@@ -140,13 +140,17 @@ TESTS = {
         prepare_test(middle_code='''test_car = Car()''',
                      test="test_car.working_engine",
                      answer=False),
-        prepare_test(middle_code='''test_car = Car()
-test_car.start_engine()''',
-                     test="test_car.working_engine",
-                     answer=True),
-prepare_test(middle_code='''test_car = Car()
-test_car.start_engine()
-test_car.stop_engine()''',
-                     test="test_car.working_engine",
-                     answer=False),            
+        prepare_test(middle_code='''import contextlib, io
+with contextlib.redirect_stdout(io.StringIO()) as stdout:
+    (test_car := Car()).start_engine()''',
+                     test="test_car.working_engine, stdout.getvalue()",
+                     answer=[True, "Engine has started\n"],
+                     show_code="(test_car := Car()).start_engine()"),
+prepare_test(middle_code='''with contextlib.redirect_stdout(io.StringIO()) as stdout:
+    (test_car := Car()).start_engine()
+    test_car.stop_engine()''',
+                     test="test_car.working_engine, stdout.getvalue()",
+                     answer=[False, "Engine has started\nEngine has stopped\n"],
+                     show_code='''(test_car := Car()).start_engine()
+    test_car.stop_engine()'''),            
 ]}
